@@ -5,7 +5,7 @@ Snake Game
 
 Notes
 -----
-Creating a game a first step towards training a Tenserflow model to play it. 
+Creating a game as a first step towards training a Tenserflow model to play it. 
 
 
 ![](https://github.com/CristianNic/snake_game/blob/master/screenshot.jpg)

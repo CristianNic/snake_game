@@ -17,6 +17,7 @@ class Snake():
         self.position = (0,0)
         self.color = green
         self.random_position()
+        self.score = 0 
 
     def random_position(self):
         # Random number between 0 and 520 divisible by 20
@@ -88,7 +89,7 @@ def main():
         snake.draw(surface)
         screen.blit(surface, (0,0))
 
-        text = myfont.render("Score ", 1, green)
+        text = myfont.render("Score  " + str(snake.score), 1, green)
         screen.blit(text, (10,10))
 
         pygame.display.update()

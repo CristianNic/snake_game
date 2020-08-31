@@ -14,10 +14,19 @@ gridsize = 20
 
 class Snake():
     def __init__(self):
-        pass
+        self.position = (0,0)
+        self.color = green
+        self.random_position()
+
+    def random_position(self):
+        # Random number between 0 and 520 divisible by 20
+        x = random.randrange(0, (screen_width-1), 20)
+        y = random.randrange(0, (screen_height-1), 20)
+        self.position = (x, y)
 
     def draw(self, surface):
-        pass
+        rect = ((self.position[0], self.position[1]), (gridsize, gridsize))
+        pygame.draw.rect(surface, self.color, rect)
 
 class Food():
     def __init__(self):
@@ -32,8 +41,8 @@ class Food():
         self.position = (x, y)
 
     def draw(self, surface):
-        # rect = pygame.Rect(top left corner(x, y), rectangle size(width, height))
-        rect = pygame.Rect((self.position[0], self.position[1]), (gridsize, gridsize))
+        # rect = (top left corner(x, y), rectangle size(width, height))
+        rect = ((self.position[0], self.position[1]), (gridsize, gridsize))
         pygame.draw.rect(surface, self.color, rect)
 
 def drawGrid(surface):

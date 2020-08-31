@@ -2,14 +2,27 @@ import pygame
 import random
 import sys
 
+light_gray = (40, 44, 52) #ligther gray (91, 98, 111)
+dark_gray = (33, 37, 43)
+red = (255,0,0)
+green = (80,200,80)
+
+screen_width = 520
+screen_height = 520
+
+gridsize = 20
+
 class Snake():
     def __init__(self):
         pass
+        
+    def draw(self, surface):
+        pass    
 
 class Food():
     def __init__(self):
         self.position = (0,0)
-        self.color = (255,0,0)
+        self.color = red
         self.random_position()
         
     def random_position(self):
@@ -21,18 +34,10 @@ class Food():
 def drawGrid(surface):
     x, y = 0, 0
     for l in range(0, screen_width):
-        x = x + 20
-        y = y + 20
-        pygame.draw.line(surface, (40, 44, 52), (x, 0), (x, screen_height))
-        pygame.draw.line(surface, (40, 44, 52), (0, y), (screen_width, y))   # light gray (40, 44, 52),  ligther gray (91, 98, 111)
-
-screen_width = 520
-screen_height = 520
-
-gridsize = 20
-grid_width = screen_width/gridsize
-grid_height = screen_height/gridsize
-
+        x = x + gridsize
+        y = y + gridsize
+        pygame.draw.line(surface, light_gray, (x, 0), (x, screen_height))
+        pygame.draw.line(surface, light_gray, (0, y), (screen_width, y)) 
 
 def main():
     pygame.init()
@@ -40,19 +45,18 @@ def main():
     
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((screen_width, screen_height))
-    x = screen.fill((33, 37, 43))
+    screen.fill(dark_gray)
     
     surface = pygame.Surface(screen.get_size())
-    surface = surface.convert()
-      
+    
     snake = Snake()
     food = Food()
     
+    myfont = pygame.font.SysFont("None", 26)
+    
     while (True):
         clock.tick(10)
-        drawGrid(surface)
-        screen.blit(surface, (0,0))
-
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -61,10 +65,16 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-        
-        food.draw(surface)
                     
+        drawGrid(surface)
+        food.draw(surface)
+        snake.draw(surface)
+        screen.blit(surface, (0,0))    
+        text = myfont.render("Score ", 1, green)
+        screen.blit(text, (10,10))
+                        
         pygame.display.update()
 
-        
-main()
+if __name__ == '__main__':
+    main()                
+

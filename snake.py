@@ -45,9 +45,9 @@ def main():
     
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((screen_width, screen_height))
-    screen.fill(dark_gray)
     
     surface = pygame.Surface(screen.get_size())
+    surface = surface.convert()
     
     snake = Snake()
     food = Food()
@@ -65,11 +65,13 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-                    
+        
+        surface.fill(dark_gray)            
         drawGrid(surface)
         food.draw(surface)
         snake.draw(surface)
-        screen.blit(surface, (0,0))    
+        screen.blit(surface, (0,0))
+        
         text = myfont.render("Score ", 1, green)
         screen.blit(text, (10,10))
                         

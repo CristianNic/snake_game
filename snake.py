@@ -39,6 +39,16 @@ def drawGrid(surface):
         pygame.draw.line(surface, light_gray, (x, 0), (x, screen_height))
         pygame.draw.line(surface, light_gray, (0, y), (screen_width, y)) 
 
+def exit_keys():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+                
 def main():
     pygame.init()
     pygame.display.set_caption("Snake Game")
@@ -56,15 +66,7 @@ def main():
     
     while (True):
         clock.tick(10)
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
+        exit_keys()
         
         surface.fill(dark_gray)            
         drawGrid(surface)

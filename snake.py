@@ -37,9 +37,6 @@ class Snake():
     def move(self):
         current_head = self.get_head_position()
         x,y = self.direction 
-        #head_x = ((current_head[0]+(x*gridsize))%screen_width)
-        #head_y = ((current_head[1]+(y*gridsize))%screen_length)
-        #new_head = (head_x, head_y)
         new = (((current_head[0]+(x*gridsize))%screen_width), (current_head[1]+(y*gridsize))%screen_height)
         if len(self.position) > 2 and new in self.position[2:]:
             self.reset()
@@ -52,10 +49,6 @@ class Snake():
         for p in self.position:
             rect = pygame.Rect((p[0], p[1]), (gridsize,gridsize))
             pygame.draw.rect(surface, self.color, rect)
-            # pygame.draw.rect(surface, (93,216, 228), r, 1)
-        
-        #rect = ((self.position[0], self.position[1]), (gridsize, gridsize))
-        #pygame.draw.rect(surface, self.color, rect)
                     
     def handle_keys(self):
         for event in pygame.event.get():
@@ -126,13 +119,18 @@ def main():
         clock.tick(10)
         surface.fill(dark_gray)
         drawGrid(surface)
-        food.draw(surface)
         
+        if snake.get_head_position() == food.position:
+            snake.length += 1
+            snake.score += 1
+            food.random_position()        
+        
+        food.draw(surface)
         snake.handle_keys()
         snake.move()
         snake.draw(surface)
         
-        screen.blit(surface, (0,0))
+        screen.blit(surface, (0,0)) # refresh overlaping surfaces on screen
 
         text = myfont.render("Score  " + str(snake.score), 1, green)
         screen.blit(text, (10,10))

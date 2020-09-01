@@ -67,7 +67,7 @@ class Snake():
                 elif event.key == pygame.K_LEFT:
                     self.turn(left)
                 elif event.key == pygame.K_RIGHT:
-                    self.turn(right)
+                    self.turn(right)    
     
     def reset(self):
         self.length = 1
@@ -125,10 +125,7 @@ def main():
             snake.length += 1
             snake.score += 1
             food.random_position()        
-        
-        if snake.position[0][0] in [0,screen_width] or snake.position[0][1] in [0,screen_height]:
-            snake.reset()
-            
+      
         food.draw(surface)
         snake.handle_keys()
         snake.move()
@@ -139,6 +136,10 @@ def main():
         text = myfont.render("Score  " + str(snake.score), 1, green)
         screen.blit(text, (10,10))
 
+        if snake.position[0][0] in [0,screen_width] or snake.position[0][1] in [0,screen_height]:
+            snake.reset()
+            food.random_position()
+            
         pygame.display.update()
 
 if __name__ == '__main__':

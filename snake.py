@@ -28,12 +28,13 @@ class Snake():
     def get_head_position(self):
         return self.position[0]
 
+
     def turn(self, point):
         if self.length > 1 and (point[0]*-1, point[1]*-1) == self.direction:
             return
         else:
             self.direction = point
-        
+                  
     def move(self):
         current_head = self.get_head_position()
         x,y = self.direction 
@@ -125,6 +126,9 @@ def main():
             snake.score += 1
             food.random_position()        
         
+        if snake.position[0][0] in [0,screen_width] or snake.position[0][1] in [0,screen_height]:
+            snake.reset()
+            
         food.draw(surface)
         snake.handle_keys()
         snake.move()

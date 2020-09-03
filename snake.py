@@ -2,7 +2,7 @@ import pygame
 import random
 import sys
 
-light_gray = (40, 44, 52) #ligther gray (91, 98, 111)
+light_gray = (40, 44, 52)   # ligther gray (91, 98, 111)
 dark_gray = (33, 37, 43)
 red = (255,0,0)
 green = (80,200,80)
@@ -27,7 +27,6 @@ class Snake():
         
     def get_head_position(self):
         return self.position[0]
-
 
     def turn(self, point):
         if self.length > 1 and (point[0]*-1, point[1]*-1) == self.direction:
@@ -71,7 +70,6 @@ class Snake():
     
     def reset(self):
         self.length = 1
-        #self.position = random_position()
         self.position = [((screen_width/2), (screen_height/2))]
         self.direction = random.choice([up, down, left, right])
         self.score = 0
@@ -100,7 +98,7 @@ def drawGrid(surface):
         y = y + gridsize
         pygame.draw.line(surface, light_gray, (x, 0), (x, screen_height))
         pygame.draw.line(surface, light_gray, (0, y), (screen_width, y))
-                                                    
+                                                            
 def main():
     pygame.init()
     pygame.display.set_caption("Snake Game")
@@ -131,16 +129,26 @@ def main():
         snake.move()
         snake.draw(surface)
         
-        screen.blit(surface, (0,0)) # refresh overlaping surfaces on screen
+        screen.blit(surface, (0,0))
 
         text = myfont.render("Score  " + str(snake.score), 1, green)
         screen.blit(text, (10,10))
 
+        pygame.display.update()
+        
+        # Game over score if it hits the sides of the screen (next add if it crosses it's own tail)
         if snake.position[0][0] in [0,screen_width] or snake.position[0][1] in [0,screen_height]:
+            game_over_font = pygame.font.SysFont("None", 42)
+            gameover = game_over_font.render("Score  " + str(snake.score), 1, green)
+            rect = gameover.get_rect()
+            rect.center = screen.get_rect().center
+            screen.blit(gameover, rect)
+            pygame.display.update()            
+            pygame.time.wait(500)    
             snake.reset()
             food.random_position()
-            
-        pygame.display.update()
+ 
+    pygame.display.update()
 
 if __name__ == '__main__':
     main()

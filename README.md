@@ -1,8 +1,8 @@
 Snake Game
 ========================
 
-### Lighthouse Labs September 2020 Data Science Bootcamp
-### Entrance Submission
+#### Lighthouse Labs September 2020 Data Science Bootcamp
+#### Entrance Submission
 
 
 Notes 

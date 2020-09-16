@@ -1,11 +1,6 @@
 Snake Game
 ========================
 
-
-
-Notes 
------
-
 Learning to write games to train future Tenserflow models on.  
 
 ![](https://github.com/CristianNic/snake_game/blob/master/gameplay.jpg)
